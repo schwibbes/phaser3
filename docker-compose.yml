@@ -1,0 +1,7 @@
+version: "3"
+services:
+  web:
+    build: .
+    image: gamejam
+    ports:
+      - "3344:80"
