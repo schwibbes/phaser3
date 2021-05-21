@@ -12,7 +12,7 @@ var config = {
             debug: false
         }
     },
-    scene: [ MainMenuScene, GameScene, HighScoreScene ],
+    scene: [MainMenuScene, GameScene, HighScoreScene, MapEditorScene ],
     audio: {
         disableWebAudio: true
     }

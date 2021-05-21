@@ -37,14 +37,15 @@ class GameScene extends Phaser.Scene {
         this.sound.detune = 0;
 
         var Httpreq = new XMLHttpRequest();
-        Httpreq.open("GET",'./maps/level1.json',false);
+        Httpreq.open("GET",'./maps/level1.json', false);
         Httpreq.send(null);
         let lvl = JSON.parse(Httpreq.responseText);
 
         lvl.objects.forEach(obj => {
            obj.pos.forEach (p => {
-               console.log(obj.id + ": " + p)
-               this.add.sprite(p[0], p[1], obj.id).setScale(1);
+               let s = p[2] || 1
+               console.log(obj.id + ": " + p + "||" + s)
+               this.add.sprite(p[0], p[1], obj.id).setScale(s);
            });
         });
     

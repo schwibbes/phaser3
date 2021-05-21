@@ -1,0 +1,94 @@
+class MapEditorScene extends Phaser.Scene {
+    
+    
+    constructor() {
+        super('mapEditor');
+        this.activeAsset = undefined;
+        this.assetSize = 1.0;
+        this.currentLevel = { objects: [] }
+    }
+
+    preload () {
+        this.load.image('gras-s', 'assets/gras-s.png');
+        this.load.image('gras-m', 'assets/gras-m.png');
+        this.load.image('wolken', 'assets/wolken.png');
+        this.load.image('stone', 'assets/stone.png');
+        this.load.image('block', 'assets/block.png');
+        this.load.image('stamm', 'assets/stamm.png');
+        this.load.image('surligneur', 'assets/surligneur.png');
+        
+        this.load.image('sky', 'assets/Background.png');
+        this.load.image('ground', 'assets/platform.png');
+        this.load.image('star', 'assets/star.png');
+        this.load.image('bomb', 'assets/bomb.png');
+    }
+
+    create ()
+    {
+        let assets = ['gras-s', 'gras-m', 'pinselbaum', 'ruler', 'stamm', 'wolken', 'stone'] ;
+        var that = this;
+
+        let xOffset = 0;
+        var yOffset = 0;
+
+        assets.forEach(a => {
+            yOffset += 30;
+            const btn = this.add.text(xOffset, yOffset, a, { fill: '#0f0' });
+            btn.setInteractive();
+
+            btn.on('pointerup', () => { 
+                console.log(a); 
+                this.activeAsset = a;
+                btn.setStyle({ fill: '#fff' });
+            });
+        });
+
+        const copyToClipboard = str => {
+            const el = document.createElement('textarea');
+            el.value = str;
+            el.setAttribute('readonly', '');
+            el.style.position = 'absolute';
+            el.style.left = '-9999px';
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+          };
+
+        this.input.on('pointerdown', function (pointer) {
+            console.log('down: ' + that.activeAsset);
+
+            if (!that.activeAsset) return;
+            that.add.image(pointer.x, pointer.y, that.activeAsset).setScale(that.assetSize);
+            var obj = that.currentLevel.objects.find(e => { return e.id === that.activeAsset; })
+            if (!obj) {
+                that.currentLevel.objects.push({ id: that.activeAsset, pos: [] });
+                obj = that.currentLevel.objects.find(e => { return e.id === that.activeAsset; })
+            }
+
+            obj.pos.push([pointer.x, pointer.y, that.assetSize]);
+        }, this);
+
+
+        this.input.on('wheel', function (pointer, gameObjects, deltaX, deltaY, deltaZ) {
+            that.assetSize -= deltaY * 0.005;
+            that.assetSize = Math.max(that.assetSize, 0.1);
+            that.assetSize = Math.min(that.assetSize, 3);
+            console.log('size: ' + that.assetSize);
+        });
+
+        this.input.keyboard.on('keydown-' + 'R', function (event) { 
+            that.scene.start('game')
+         });
+
+         this.input.keyboard.on('keydown-' + 'C', function (event) { 
+            console.debug(that.currentLevel);
+            copyToClipboard(JSON.stringify(that.currentLevel))
+         });
+    }
+
+    
+
+    update (time, delta) {}
+
+}
