@@ -26,6 +26,12 @@ class GameScene extends Phaser.Scene {
 
     create ()
     {
+        this.time.addEvent({
+            delay: 1000, // ms
+            callback: decreaseTimer,
+            repeat: roundMaxTime - 1
+        });
+
         this.sound.play('theme', { loop: -1 });
         this.sound.volume = 0.1;
         this.sound.detune = 0;
@@ -114,7 +120,7 @@ class GameScene extends Phaser.Scene {
         bombs = this.physics.add.group();
 
         //  The score
-        scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+        scoreText = this.add.text(16, 16, hudText(), { fontSize: '32px', fill: '#fff' });
 
         //  Collide the player and the stars and the riddles with the platforms
         this.physics.add.collider(player, platforms);
