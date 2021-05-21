@@ -13,6 +13,7 @@ class GameScene extends Phaser.Scene {
         this.load.image('gras-s', 'assets/gras-s.png');
         this.load.image('gras-m', 'assets/gras-m.png');
         this.load.image('stone', 'assets/stone.png');
+        this.load.image('block', 'assets/block.png');
         this.load.image('stamm', 'assets/stamm.png');
         this.load.image('surligneur', 'assets/surligneur.png');
         
@@ -101,7 +102,7 @@ class GameScene extends Phaser.Scene {
         });
 
         riddles = this.physics.add.group({
-            key: 'riddle',
+            key: 'block',
             repeat: 3,
             setXY: { x: 30, y: 0, stepX: 70 }
         });
