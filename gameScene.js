@@ -12,7 +12,6 @@ class GameScene extends Phaser.Scene {
 
         this.load.image('gras-s', 'assets/gras-s.png');
         this.load.image('gras-m', 'assets/gras-m.png');
-        this.load.image('stone', 'assets/stone.png');
         this.load.image('block', 'assets/block.png');
         this.load.image('stamm', 'assets/stamm.png');
         this.load.image('surligneur', 'assets/surligneur.png');
@@ -99,15 +98,28 @@ class GameScene extends Phaser.Scene {
 
         var riddlesModel = riddleGenerator.createRiddle();
         riddles = this.physics.add.group({
-            key: 'riddles',
+            repeat: 2,
+            key: 'block'
         });
-        riddles.create(128, 64, 'block').refreshBody();
+        
         var newRiddle = riddleGenerator.createRiddle();
-        for (let i = 0; i < riddles.children.length; i++) {
-            riddles[i].enableBody(true, newRiddle[i].x, 0, true, true);
-            riddles[i].riddleModel = newRiddle[i];
-            riddles[i].setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
-        }
+        let i = 0;
+        riddles.children.iterate(function (child) {
+            child.enableBody(true, newRiddle[i].x, 0, true, true).setScale(0.25);
+            child.riddleModel = newRiddle[i];
+            child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+            console.log("finished");
+            i++;
+        });
+
+        // for (let i = 0; i < newRiddle.length; i++) {
+        //     console.log(newRiddle[i].x);
+        //     // riddles.create(128, 64, 'block').refreshBody();
+        //     riddles[i].enableBody(true, newRiddle[i].x, 0, true, true);
+        //     riddles[i].riddleModel = newRiddle[i];
+        //     riddles[i].setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+        //     console.log("finished");
+        // }
 
         bombs = this.physics.add.group();
 
