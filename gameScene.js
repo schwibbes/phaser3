@@ -22,12 +22,13 @@ class GameScene extends Phaser.Scene {
         this.load.image('bomb', 'assets/bomb.png');
         this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
     }
-
     create ()
     {
+        gameState = new GameState();
         this.time.addEvent({
             delay: 1000, // ms
-            callback: decreaseTimer,
+            callback: gameState.decreaseTimer,
+            callbackScope: gameState,
             repeat: roundMaxTime - 1
         });
 
@@ -124,7 +125,7 @@ class GameScene extends Phaser.Scene {
         bombs = this.physics.add.group();
 
         //  The score
-        scoreText = this.add.text(16, 16, hudText(), { fontSize: '32px', fill: '#fff' });
+        scoreText = this.add.text(16, 16, gameState.hudText(), { fontSize: '32px', fill: '#fff' });
 
         //  Collide the player and the riddles with the platforms
         this.physics.add.collider(player, platforms);
@@ -139,9 +140,9 @@ class GameScene extends Phaser.Scene {
 
     update (time, delta)
     {
-        if (gameOver)
+        if (gameState.isGameOver())
         {
-            return;
+            this.scene.start("highScore");
         }
 
         updatePlayer();
