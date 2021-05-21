@@ -25,4 +25,5 @@ var platforms;
 var cursors;
 var gameOver = false;
 var scoreText;
+var riddles;
 var game = new Phaser.Game(config);
