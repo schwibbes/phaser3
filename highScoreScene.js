@@ -8,10 +8,8 @@ class HighScoreScene extends Phaser.Scene {
 
     create ()
     {
-        var logo = this.add.text(400, 100, 'Highscore');
-        let xOffset = config.width / 2;
-        let yOffset = config.height / 2 - 30;
-        this.createButton(xOffset, yOffset, 'Back', 'mainMenu');
+        var logo = this.add.text(config.width / 2, 100, 'Highscore', {align: "center"});
+        this.createButton(config.width - 100,  config.height - 100, 'Back', 'mainMenu');
     }
 
     createButton(x, y, text, sceneName) {
