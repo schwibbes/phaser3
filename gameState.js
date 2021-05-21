@@ -4,6 +4,7 @@ class GameState{
      score = 0;
      lives = options.maxLives;
      timeLeft = options.roundMaxTime;
+     riddle = undefined;
     
      updateScore(value) {
         this.score += value;
@@ -15,7 +16,13 @@ class GameState{
     }
     
      hudText() {
-        return ['Score: ' + this.score, "Lives: " + this.lives, "Time Left: " + this.timeLeft];
+         let toFind = null;
+         if (this.riddle == null) {
+            toFind = "";
+         } else {
+            toFind = this.riddle[0].riddle.question;
+         }
+        return ['Score: ' + this.score, "Lives: " + this.lives, "Time Left: " + this.timeLeft, "Find: " + toFind];
     }
     
     decreaseTimer() {
@@ -38,5 +45,10 @@ class GameState{
 
     isGameOver() {
         return this.gameLost || this.gameWon;
+    }
+
+    setRiddle(currentRiddle) {
+        this.riddle = currentRiddle;
+        this.updateHud();
     }
 }

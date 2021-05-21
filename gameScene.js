@@ -118,14 +118,13 @@ class GameScene extends Phaser.Scene {
             child.enableBody(true, newRiddle[i].x, 0, true, true).setScale(0.25);
             child.riddleModel = newRiddle[i];
             child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
-            console.log("finished");
             i++;
         });
-
         bombs = this.physics.add.group();
 
         //  The score
         scoreText = this.add.text(16, 16, gameState.hudText(), { fontSize: '32px', fill: '#fff' });
+        gameState.setRiddle(newRiddle);
 
         //  Collide the player and the riddles with the platforms
         this.physics.add.collider(player, platforms);
