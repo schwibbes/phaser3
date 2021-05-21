@@ -5,7 +5,7 @@ var riddleGenerator = (function () {
 		{ question: "buh", answer: "-" },
 	];
 
-	var spawnPoints = [ 100, 400, 800 ];
+	var spawnPoints = [ 100, 400, 800, 650, 280, 487 ];
 
 	function getRandomInt(max) {
 		return Math.floor(Math.random() * max);

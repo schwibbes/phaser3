@@ -113,15 +113,6 @@ class GameScene extends Phaser.Scene {
             i++;
         });
 
-        // for (let i = 0; i < newRiddle.length; i++) {
-        //     console.log(newRiddle[i].x);
-        //     // riddles.create(128, 64, 'block').refreshBody();
-        //     riddles[i].enableBody(true, newRiddle[i].x, 0, true, true);
-        //     riddles[i].riddleModel = newRiddle[i];
-        //     riddles[i].setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
-        //     console.log("finished");
-        // }
-
         bombs = this.physics.add.group();
 
         //  The score
