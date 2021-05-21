@@ -19,6 +19,7 @@ var config = {
 };
 
 const options = {
+    playerName: "Player",
     roundMaxTime: 15,
     maxLives: 3,
     maxHighScoreEntriesCount: 10
