@@ -30,14 +30,18 @@ class GameScene extends Phaser.Scene {
         this.sound.volume = 0.1;
         this.sound.detune = 0;
 
-        for(var i = 0; i < 50; i++) {
-            let x = Math.floor(Math.random() * 800);
-            let y = 300 + Math.floor(Math.random() * 300);
-            let s = Math.random() ;
-            
-            this.add.sprite(x, y, 'gras-s').setName('gras-' + i).setScale(s);
-        }
+        var Httpreq = new XMLHttpRequest();
+        Httpreq.open("GET",'./maps/level1.json',false);
+        Httpreq.send(null);
+        let lvl = JSON.parse(Httpreq.responseText);
 
+        lvl.objects.forEach(obj => {
+           obj.pos.forEach (p => {
+               console.log(obj.id + ": " + p)
+               this.add.sprite(p[0], p[1], obj.id).setScale(1);
+           });
+        });
+    
         //  The platforms group contains the ground and the 2 ledges we can jump on
         platforms = this.physics.add.staticGroup();
 
