@@ -9,23 +9,20 @@ class MapEditorScene extends Phaser.Scene {
     }
 
     preload () {
-        this.load.image('gras-s', 'assets/gras-s.png');
         this.load.image('gras-m', 'assets/gras-m.png');
-        this.load.image('wolken', 'assets/wolken.png');
-        this.load.image('stone', 'assets/stone.png');
-        this.load.image('block', 'assets/block.png');
+        this.load.image('gras-s', 'assets/gras-s.png');
+        this.load.image('pinselbaum', 'assets/pinselbaum.png');
+        this.load.image('ruler', 'assets/ruler.png');
         this.load.image('stamm', 'assets/stamm.png');
+        this.load.image('stone', 'assets/stone.png');
+        this.load.image('surligneur-green', 'assets/surligneur-green.png');
         this.load.image('surligneur', 'assets/surligneur.png');
-        
-        this.load.image('sky', 'assets/Background.png');
-        this.load.image('ground', 'assets/platform.png');
-        this.load.image('star', 'assets/star.png');
-        this.load.image('bomb', 'assets/bomb.png');
+        this.load.image('wolken', 'assets/wolken.png');
     }
 
     create ()
     {
-        let assets = ['gras-s', 'gras-m', 'pinselbaum', 'ruler', 'stamm', 'wolken', 'stone'] ;
+        let assets = ['gras-s', 'gras-m', 'pinselbaum', 'ruler', 'stamm', 'stone', 'surligneur-green', 'surligneur', 'wolken'] ;
         var that = this;
 
         let xOffset = 0;
