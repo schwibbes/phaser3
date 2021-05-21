@@ -100,20 +100,30 @@ class GameScene extends Phaser.Scene {
 
         });
 
+        riddles = this.physics.add.group({
+            key: 'riddle',
+            repeat: 3,
+            setXY: { x: 30, y: 0, stepX: 70 }
+        });
+
         bombs = this.physics.add.group();
 
         //  The score
         scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 
-        //  Collide the player and the stars with the platforms
+        //  Collide the player and the stars and the riddles with the platforms
         this.physics.add.collider(player, platforms);
         this.physics.add.collider(stars, platforms);
         this.physics.add.collider(bombs, platforms);
+        this.physics.add.collider(riddles, platforms);
 
         //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
         this.physics.add.overlap(player, stars, collectStar, null, this);
 
         this.physics.add.collider(player, bombs, hitBomb, null, this);
+
+        // Checks to see if the player overlaps with any of the riddles, if he does call the collectRiddle function
+        this.physics.add.collider(player, riddles, collectRiddle, null, this);
     }
 
     update (time, delta)
