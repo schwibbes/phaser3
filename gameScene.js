@@ -25,6 +25,7 @@ class GameScene extends Phaser.Scene {
         this.load.image('surligneur', 'assets/surligneur.png');
         this.load.image('wolken', 'assets/wolken.png');
 
+
         this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
 
 
