@@ -2,8 +2,8 @@ class GameState{
      gameLost = false;
      gameWon = false;
      score = 0;
-     lives = 3;
-     timeLeft = roundMaxTime;
+     lives = options.maxLives;
+     timeLeft = options.roundMaxTime;
     
      updateScore(value) {
         this.score += value;
@@ -19,9 +19,7 @@ class GameState{
     }
     
     decreaseTimer() {
-        console.log("timeLeft before update " + this.timeLeft);
         this.timeLeft--;
-        console.log("timeLeft after update " + this.timeLeft);
         this.updateHud();
         this.updateGameOver();
     }

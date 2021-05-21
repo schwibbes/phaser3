@@ -18,6 +18,11 @@ var config = {
     }
 };
 
+const options = {
+    roundMaxTime: 15,
+    maxLives: 3
+}
+
 var player;
 var stars;
 var bombs;
@@ -26,5 +31,4 @@ var cursors;
 var scoreText;
 var riddles;
 var gameState;
-const roundMaxTime = 10;
 var game = new Phaser.Game(config);
