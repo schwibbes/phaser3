@@ -133,10 +133,12 @@ class GameScene extends Phaser.Scene {
     {
         if (gameState.isGameOver())
         {
+            highScore.addEntry("Player", gameState.score)
             this.scene.start("highScore");
+        } else {
+            updatePlayer();
         }
 
-        updatePlayer();
     }
 
 }
