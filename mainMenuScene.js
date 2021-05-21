@@ -1,2 +1,2 @@
-export class MainMenuScene extends Phaser.Scene {
+class MainMenuScene extends Phaser.Scene {
 }
