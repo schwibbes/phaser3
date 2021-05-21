@@ -12,6 +12,7 @@ function collectRiddle(player, riddle) {
 
 
     var newRiddle = riddleGenerator.createRiddle();
+    gameState.setRiddle(newRiddle);
     let i = 0;
     riddles.children.iterate(function(child) {        
         child.enableBody(true, newRiddle[i].x, 0, true, true);
