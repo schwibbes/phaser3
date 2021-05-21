@@ -1,8 +1,7 @@
 
-import { Score } from './score.js';
+// import { Score } from './score.js';
 
 let state = {} || state;
-
 
 var config = {
     type: Phaser.AUTO,
@@ -60,7 +59,7 @@ function create ()
     this.sound.volume = 0.1;
     this.sound.detune = 0;
 
-    for(var i = 0; i < 25; i++) {
+    for(var i = 0; i < 50; i++) {
         let x = Math.floor(Math.random() * 800);
         let y = 300 + Math.floor(Math.random() * 300);
         let s = Math.random() ;
