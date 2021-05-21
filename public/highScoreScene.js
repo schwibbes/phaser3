@@ -15,9 +15,7 @@ class HighScoreScene extends Phaser.Scene {
 
     create ()
     {
-        this.sound.play('theme', { loop: -1 });
-        this.sound.volume = 0.1;
-        this.sound.detune = 0;
+        var logo = this.add.text(400, 100, 'Highscore');
     }
 
     update (time, delta)

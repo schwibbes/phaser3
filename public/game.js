@@ -3,8 +3,8 @@ let state = {} || state;
 
 var config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 600,
+    width: 1024,
+    height: 768,
     physics: {
         default: 'arcade',
         arcade: {
@@ -25,5 +25,4 @@ var platforms;
 var cursors;
 var gameOver = false;
 var scoreText;
-
 var game = new Phaser.Game(config);
