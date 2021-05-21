@@ -20,7 +20,8 @@ var config = {
 
 const options = {
     roundMaxTime: 15,
-    maxLives: 3
+    maxLives: 3,
+    maxHighScoreEntriesCount: 10
 }
 
 var player;
@@ -31,4 +32,5 @@ var cursors;
 var scoreText;
 var riddles;
 var gameState;
+var highScore = new HighScore();
 var game = new Phaser.Game(config);
