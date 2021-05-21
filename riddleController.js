@@ -1,0 +1,3 @@
+function collectRiddle(player, riddle) {
+
+}
