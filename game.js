@@ -41,12 +41,13 @@ function preload ()
         'sounds/ost-v1.wav'
     ]);
 
-    this.load.image('gras-s', 'pictures/gras-s.png');
-    this.load.image('gras-m', 'pictures/gras-m.png');
-    this.load.image('stamm', 'pictures/stamm.png');
-    this.load.image('surligneur', 'pictures/surligneur.png');
+    this.load.image('gras-s', 'assets/gras-s.png');
+    this.load.image('gras-m', 'assets/gras-m.png');
+    this.load.image('stone', 'assets/stone.png');
+    this.load.image('stamm', 'assets/stamm.png');
+    this.load.image('surligneur', 'assets/surligneur.png');
     
-    this.load.image('sky', 'pictures/Background.png');
+    this.load.image('sky', 'assets/Background.png');
     this.load.image('ground', 'assets/platform.png');
     this.load.image('star', 'assets/star.png');
     this.load.image('bomb', 'assets/bomb.png');
