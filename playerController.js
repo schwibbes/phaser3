@@ -47,7 +47,7 @@ function updatePlayer() {
 
     if (cursors.up.isDown && player.body.touching.down)
     {
-        player.setVelocityY(-330);git 
+        player.setVelocityY(-330);
     }
 }
 
