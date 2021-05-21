@@ -4,24 +4,21 @@ class MainMenuScene extends Phaser.Scene {
         super('mainMenu');
     }
 
-    preload ()
-    {
-        this.load.audio('theme', [
-            'sounds/ost-v1.wav'
-        ]);
-
-        //this.load.image('gras-s', 'assets/gras-s.png');
-    }
+    // preload () {}
 
     create ()
     {
-        this.sound.play('theme', { loop: -1 });
-        this.sound.volume = 0.1;
-        this.sound.detune = 0;
+        let xOffset = config.width / 2;
+        let yOffset = config.height / 2 - 30;
+        this.createButton(xOffset, yOffset, 'Start', 'game');
+        this.createButton(xOffset, yOffset + 30, 'Highscore', 'highScore');
     }
 
-    update (time, delta)
-    {
-        // start game on click
+    createButton(x, y, text, sceneName) {
+        this.add.text(x, y, text, { fill: '#0f0' })
+            .setInteractive()
+            .on('pointerup', () => this.scene.start(sceneName) );
     }
+
+    // update (time, delta) {}
 }
