@@ -29,7 +29,7 @@ class GameScene extends Phaser.Scene {
             delay: 1000, // ms
             callback: gameState.decreaseTimer,
             callbackScope: gameState,
-            repeat: roundMaxTime - 1
+            repeat: options.roundMaxTime - 1
         });
 
         this.sound.play('theme', { loop: -1 });
