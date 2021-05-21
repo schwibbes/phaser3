@@ -97,39 +97,27 @@ class GameScene extends Phaser.Scene {
             left:Phaser.Input.Keyboard.KeyCodes.A,
             right:Phaser.Input.Keyboard.KeyCodes.D});
 
-        //  Some stars to collect, 12 in total, evenly spaced 70 pixels apart along the x axis
-        stars = this.physics.add.group({
-            key: 'star',
-            repeat: 11,
-            setXY: { x: 12, y: 0, stepX: 70 }
-        });
-
-        stars.children.iterate(function (child) {
-
-            //  Give each star a slightly different bounce
-            child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
-
-        });
-
+        var riddlesModel = riddleGenerator.createRiddle();
         riddles = this.physics.add.group({
-            key: 'block',
-            repeat: 3,
-            setXY: { x: 30, y: 0, stepX: 70 }
+            key: 'riddles',
         });
+        riddles.create(128, 64, 'block').refreshBody();
+        var newRiddle = riddleGenerator.createRiddle();
+        for (let i = 0; i < riddles.children.length; i++) {
+            riddles[i].enableBody(true, newRiddle[i].x, 0, true, true);
+            riddles[i].riddleModel = newRiddle[i];
+            riddles[i].setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+        }
 
         bombs = this.physics.add.group();
 
         //  The score
         scoreText = this.add.text(16, 16, hudText(), { fontSize: '32px', fill: '#fff' });
 
-        //  Collide the player and the stars and the riddles with the platforms
+        //  Collide the player and the riddles with the platforms
         this.physics.add.collider(player, platforms);
-        this.physics.add.collider(stars, platforms);
         this.physics.add.collider(bombs, platforms);
         this.physics.add.collider(riddles, platforms);
-
-        //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
-        this.physics.add.overlap(player, stars, collectStar, null, this);
 
         this.physics.add.collider(player, bombs, hitBomb, null, this);
 
