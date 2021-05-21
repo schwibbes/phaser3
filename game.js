@@ -19,6 +19,9 @@ var config = {
         preload: preload,
         create: create,
         update: update
+    },
+    audio: {
+        disableWebAudio: true
     }
 };
 
@@ -35,7 +38,16 @@ var game = new Phaser.Game(config);
 
 function preload ()
 {
-    this.load.image('sky', 'assets/sky.png');
+    this.load.audio('theme', [
+        'sounds/ost-v1.wav'
+    ]);
+
+    this.load.image('gras-s', 'pictures/gras-s.png');
+    this.load.image('gras-m', 'pictures/gras-m.png');
+    this.load.image('stamm', 'pictures/stamm.png');
+    this.load.image('surligneur', 'pictures/surligneur.png');
+    
+    this.load.image('sky', 'pictures/Background.png');
     this.load.image('ground', 'assets/platform.png');
     this.load.image('star', 'assets/star.png');
     this.load.image('bomb', 'assets/bomb.png');
@@ -44,8 +56,17 @@ function preload ()
 
 function create ()
 {
-    //  A simple background for our game
-    this.add.image(400, 300, 'sky');
+    this.sound.play('theme', { loop: -1 });
+    this.sound.volume = 0.1;
+    this.sound.detune = 0;
+
+    for(var i = 0; i < 25; i++) {
+        let x = Math.floor(Math.random() * 800);
+        let y = 300 + Math.floor(Math.random() * 300);
+        let s = Math.random() ;
+        
+        this.add.sprite(x, y, 'gras-s').setName('gras-' + i).setScale(s);
+    }
 
     //  The platforms group contains the ground and the 2 ledges we can jump on
     platforms = this.physics.add.staticGroup();
@@ -60,7 +81,7 @@ function create ()
     platforms.create(750, 220, 'ground');
 
     // The player and its settings
-    player = this.physics.add.sprite(100, 450, 'dude');
+    player = this.physics.add.sprite(100, 450, 'stylus.png');
 
     //  Player physics properties. Give the little guy a slight bounce.
     player.setBounce(0.2);
@@ -71,7 +92,8 @@ function create ()
         key: 'left',
         frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
         frameRate: 10,
-        repeat: -1
+        repeat: -1,
+        scale: 2
     });
 
     this.anims.create({
@@ -88,7 +110,12 @@ function create ()
     });
 
     //  Input Events
-    cursors = this.input.keyboard.createCursorKeys();
+    // cursors = this.input.keyboard.createCursorKeys();
+    cursors = this.input.keyboard.addKeys(
+        {up:Phaser.Input.Keyboard.KeyCodes.W,
+        down:Phaser.Input.Keyboard.KeyCodes.S,
+        left:Phaser.Input.Keyboard.KeyCodes.A,
+        right:Phaser.Input.Keyboard.KeyCodes.D});
 
     //  Some stars to collect, 12 in total, evenly spaced 70 pixels apart along the x axis
     stars = this.physics.add.group({
