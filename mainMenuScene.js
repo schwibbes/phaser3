@@ -12,6 +12,7 @@ class MainMenuScene extends Phaser.Scene {
         let yOffset = config.height / 2 - 30;
         this.createButton(xOffset, yOffset, 'Start', 'game');
         this.createButton(xOffset, yOffset + 30, 'Highscore', 'highScore');
+        this.createButton(xOffset, yOffset + 60, 'Map Editor', 'mapEditor');
     }
 
     createButton(x, y, text, sceneName) {
