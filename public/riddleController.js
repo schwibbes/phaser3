@@ -1,9 +1,9 @@
 function collectRiddle(player, riddle) {
     // Was the solution right or wrong?
     if (riddle.riddleModel.correct) {
-        updateScore(100);
+        gameState.updateScore(100);
     } else {
-        decreaseLive();
+        gameState.decreaseLive();
     }
     // In all cases: calculate new riddles 
     riddles.children.iterate(function(child) {
