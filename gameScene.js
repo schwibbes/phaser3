@@ -10,7 +10,6 @@ class GameScene extends Phaser.Scene {
             'sounds/theme.wav'
         ]);
 
-        this.load.image('sky', 'assets/Background.png');
         this.load.image('block', 'assets/block.png');
         this.load.image('bomb', 'assets/bomb.png');
         this.load.image('gras-m', 'assets/gras-m.png');
@@ -41,11 +40,11 @@ class GameScene extends Phaser.Scene {
         });
 
         this.sound.play('theme', { loop: -1 });
-        this.sound.volume = 0.1;
+        this.sound.volume = 0.3;
         this.sound.detune = 0;
 
         var Httpreq = new XMLHttpRequest();
-        Httpreq.open("GET",'./maps/level1.json', false);
+        Httpreq.open("GET",'./maps/level' + ( window.location.hash ? window.location.hash.replace('#', '') : '1' ) + '.json', false);
         Httpreq.send(null);
         let lvl = JSON.parse(Httpreq.responseText);
 
@@ -53,18 +52,13 @@ class GameScene extends Phaser.Scene {
            obj.pos.forEach (p => {
                let s = p[2] || 1
                console.log(obj.id + ": " + p + "||" + s)
-               this.add.sprite(p[0], p[1], obj.id).setScale(s);
+               this.add.sprite(p[0], p[1], obj.id).setScale(s).setDepth(1);
            });
         });
     
-        //  The platforms group contains the ground and the 2 ledges we can jump on
+        // FUTURE: define platforms as part of level
         platforms = this.physics.add.staticGroup();
-
-        //  Here we create the ground.
-        //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
         platforms.create(400, 568, 'ground').setScale(2).refreshBody();
-
-        //  Now let's create some ledges
         platforms.create(600, 400, 'ground');
         platforms.create(50, 250, 'ground');
         platforms.create(750, 220, 'ground');
@@ -118,10 +112,12 @@ class GameScene extends Phaser.Scene {
             sprite.setScale(0.3);
             sprite.riddleModel = possibility;
             let style = { font: "32px Arial", fill: "#ff0044", wordWrap: true, wordWrapWidth: sprite.width, align: "center", backgroundColor: "#ffff00" };
-            let text = this.add.text(possibility.x, 0, possibility.solution.answer, style);
+            let text = this.add.text(possibility.x, 0, possibility.solution.answer, style).setDepth(0);
             text.setOrigin(0.5,0.5);
             blockTexts.push(text);
         }
+
+        this.add.text(300, 700, "use WASD and find the right kanji", { fill: '#fff' });
 
         bombs = this.physics.add.group();
 
