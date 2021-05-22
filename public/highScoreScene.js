@@ -10,13 +10,15 @@ class HighScoreScene extends Phaser.Scene {
     {
         var logo = this.add.text(config.width / 2, 100, 'Highscore', { align: "center" });
         
-        highScore.entries.forEach((entry, index) => this.printScore(index, entry[0], entry[1]));
+        highScore.entries.forEach((entry, index) => this.printScore(index, entry));
 
         this.createButton(config.width - 100,  config.height - 100, 'Back', 'mainMenu');
     }
 
-    printScore(index, playerName, score) {
-        this.add.text(config.width / 2 - 100, 150 + index * 20, playerName + " " + score);
+    printScore(index, entry) {
+        let isLatest = highScore.latestIndex === index;
+        let style = { fill: isLatest ? '#0f0' : '#fff' };
+        this.add.text(config.width / 2 - 100, 150 + index * 20, entry.playerName + " " + entry.score, style);
     }
 
     createButton(x, y, text, sceneName) {
