@@ -1,8 +1,9 @@
 var riddleGenerator = (function () {
 	var solutions = [
-		{ question: "schi", answer: "#" },
-		{ question: "schu", answer: "+" },
-		{ question: "buh", answer: "-" },
+		{ question: "Mensch", answer: "\u5165" },
+		{ question: "Loch", answer: "\u30ea" },
+		{ question: "Stärke", answer: "\u529b" },
+		{ question: "Disziplin", answer: "\u8ebe" },
 	];
 
 	var spawnPoints = [ 100, 400, 800, 650, 280, 487 ];
@@ -12,7 +13,7 @@ var riddleGenerator = (function () {
 	}
 
 	function getRandomChar(skip) {
-		var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+		var characters = "\u4eb0\u56f0\u4eb2\u5650\u5240\u55b0\u4eb6\u5140\u4eb8\u4eb9\u5390";
 		var notUniqueAnswer = true;
 
 		while (notUniqueAnswer) {
@@ -45,7 +46,7 @@ var riddleGenerator = (function () {
 	}
 
 	function createRiddleTexts(){
-		var candidate = solutions[getRandomInt(solutions.length - 1)];
+		var candidate = solutions[getRandomInt(solutions.length)];
 		var answer = JSON.parse(JSON.stringify(candidate));
 		var wrong1 = JSON.parse(JSON.stringify(candidate));
 		var wrong2 = JSON.parse(JSON.stringify(candidate));
@@ -54,14 +55,14 @@ var riddleGenerator = (function () {
 		wrong2.answer = getRandomChar(charsToSkip.concat(wrong1.answer));
 
 		return [ {
-			riddle: answer,
+			solution: answer,
 			correct: true
 		}, {
-			riddle: wrong1,
+			solution: wrong1,
 			correct: false
 		} , {
-		riddle: wrong1,
-		correct: false
+			solution: wrong2,
+			correct: false	
 		}];
 	}
 

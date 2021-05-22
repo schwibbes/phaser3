@@ -71,6 +71,7 @@ class GameScene extends Phaser.Scene {
 
         // The player and its settings
         player = this.physics.add.sprite(100, 450, 'stylus.png');
+        player.setScale(1.5);
 
         //  Player physics properties. Give the little guy a slight bounce.
         player.setBounce(0.2);
@@ -107,19 +108,21 @@ class GameScene extends Phaser.Scene {
             right:Phaser.Input.Keyboard.KeyCodes.D});
 
         var riddlesModel = riddleGenerator.createRiddle();
-        riddles = this.physics.add.group({
-            repeat: 2,
-            key: 'block'
-        });
-        
+        riddles = this.physics.add.group();
+
         var newRiddle = riddleGenerator.createRiddle();
         let i = 0;
-        riddles.children.iterate(function (child) {
-            child.enableBody(true, newRiddle[i].x, 0, true, true).setScale(0.25);
-            child.riddleModel = newRiddle[i];
-            child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
-            i++;
-        });
+        blockTexts = [];
+        for (let possibility of newRiddle) {
+            let sprite = riddles.create(possibility.x, 0, 'block');
+            sprite.setScale(0.3);
+            sprite.riddleModel = possibility;
+            let style = { font: "32px Arial", fill: "#ff0044", wordWrap: true, wordWrapWidth: sprite.width, align: "center", backgroundColor: "#ffff00" };
+            let text = this.add.text(possibility.x, 0, possibility.solution.answer, style);
+            text.setOrigin(0.5,0.5);
+            blockTexts.push(text);
+        }
+
         bombs = this.physics.add.group();
 
         //  The score
@@ -144,6 +147,13 @@ class GameScene extends Phaser.Scene {
             highScore.addEntry(options.playerName, gameState.score)
             this.scene.start("highScore");
         } else {
+            let i = 0;
+            riddles.children.iterate(function (child) {
+                blockTexts[i].x = child.x;
+                blockTexts[i].y = child.y;
+                blockTexts[i].setText(gameState.getRiddle()[i].solution.answer);
+                i++;
+            });
             updatePlayer();
         }
 

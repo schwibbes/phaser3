@@ -20,7 +20,7 @@ class GameState{
          if (this.riddle == null) {
             toFind = "";
          } else {
-            toFind = this.riddle[0].riddle.question;
+            toFind = this.riddle[0].solution.question;
          }
         return ['Score: ' + this.score, "Lives: " + this.lives, "Time Left: " + this.timeLeft, "Find: " + toFind];
     }
@@ -50,5 +50,9 @@ class GameState{
     setRiddle(currentRiddle) {
         this.riddle = currentRiddle;
         this.updateHud();
+    }
+
+    getRiddle() {
+        return this.riddle;
     }
 }
