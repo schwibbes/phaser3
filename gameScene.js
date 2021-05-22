@@ -26,7 +26,7 @@ class GameScene extends Phaser.Scene {
         this.load.image('wolken', 'assets/wolken.png');
 
 
-        this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
+        this.load.spritesheet('dude', 'assets/dude_bigger.png', { frameWidth: 545, frameHeight: 612});
 
 
     }
@@ -70,8 +70,8 @@ class GameScene extends Phaser.Scene {
         platforms.create(750, 220, 'ground');
 
         // The player and its settings
-        player = this.physics.add.sprite(100, 450, 'stylus.png');
-        player.setScale(1.5);
+        player = this.physics.add.sprite(100, 450, 'dude');
+        player.setScale(0.15);
 
         //  Player physics properties. Give the little guy a slight bounce.
         player.setBounce(0.2);
